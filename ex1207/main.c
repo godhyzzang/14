@@ -1,27 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void main(void) {
-	char* pc = NULL;
-	int i = 0;
+struct Book {
+	int number;
+	char title[10];
 
-	pc = (char*)malloc(100 * sizeof(char));
+};
 
-	if (pc = NULL) {
-		printf("메모리할당실패\n");
-		exit(1);
-	}
+int main(void) {
 
-	for (i = 0; i < 26; i++) {
-		pc[i] = 'a' + i;
-	}
-	pc[i] = 0; //맨 마지막에 0 문자 넣어줌. ->문자열 개행문자??
-	//i 전역변수라 여기서는 제일 마지막 번호. 
-	printf("%s\n", pc);
+	//book에 동적할당
+	struct Book* bp = (struct Book*)malloc(2 * sizeof(struct Book));
+	//구조체 하나당 14byte이지만 4byte단위로 계산되어 16byte로 계산됨.
 
+	bp->number = 1; //bp는 16byte단위이므로 주소 16씩 이동. 
+	strcpy(bp->title, "C programming");
+	(bp + 1)->number = 2; //bp는 16byte단위이므로 주소 16씩 이동. 
+	strcpy((p + 1)->title, "Electronics");
 
+	free(bp);
+	return;
 
-
-	free(pc);//malloc코드와 동시에 작성
 }
-
