@@ -9,16 +9,26 @@ struct Book {
 
 int main(void) {
 
-	//book에 동적할당
-	struct Book* bp = (struct Book*)malloc(2 * sizeof(struct Book));
-	//구조체 하나당 14byte이지만 4byte단위로 계산되어 16byte로 계산됨.
+	int i;
+	struct Book** bookshelf;
 
-	bp->number = 1; //bp는 16byte단위이므로 주소 16씩 이동. 
-	strcpy(bp->title, "C programming");
-	(bp + 1)->number = 2; //bp는 16byte단위이므로 주소 16씩 이동. 
-	strcpy((p + 1)->title, "Electronics");
+	bookshelf = (struct Book**)malloc(3 * sizeof(struct Book*));
 
-	free(bp);
-	return;
+	for (i = 0; i < 3; i++) {
+		bookshelf[i] = (struct Book*)malloc(10 * sizeof(struct Book));
+	}
+
+
+
+	//구조체 포인터 3개가 각각 가리키는 주소 해제
+	for (int i = 0; i < 3; i++)
+		free(bookshelf[i]); //bookshelf포인터 3개가 가리키느 ㄴ코드 각각 해제
+
+	//구조체 이중 포인터가 가리키는 주소 해제
+	free(bookshelf);//bookshelf 포인터 3개 자체 해제. 
+
+
+
+
 
 }
